@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Forum</title>
+    <link rel="stylesheet" type="text/css" href="/css/main.css">
+	<link rel="stylesheet" type="text/css" href="/css/connexion.css">
+	
+</head>
+<body>
+
+    <video id="background-video" autoplay loop muted>
+        <source src="/assets/traphub2.mp4" type="video/mp4">
+    </video>
+
+    <div id="wsh">
+        <div class="vatefaireenculernemo">
+            <h1 class="titre">TrapHub</h1>
+            <p class="titredessous">Vivez la musique, créez des souvenirs.</p>
+            <div class="boutons">
+                <button id="boutonSeConnecter">Se connecter</button>
+                <button id="boutonSinscrire">S'inscrire</button>
+            </div>
+        </div>
+    </div>
+
+    <div id="popupSeConnecter">
+        <button id="boutonFermer">X</button>
+        <h1 class="titreConnexion">TrapHub</h1>
+        <div class="lesInputs">
+            <form action="/login" method="POST">
+                <label for="username">Nom d'utilisateur:</label>
+                <input type="text" id="username" name="username" required>
+        
+                <label for="password">Mot de passe:</label>
+                <input type="password" id="password" name="password" required>
+        
+                <button type="submit">Connexion</button>
+            </form>
+        </div>
+    </div>
+
+    <div id="popupSinscrire">
+        <button id="boutonFermer2">X</button>
+        <h1 class="titreConnexion">TrapHub</h1>
+        <div class="lesInputsInscription">
+            <form action="/register" method="post">
+                <label for="username">Nom d'utilisateur:</label>
+                <input type="text" name="username"><br>
+        
+                <label for="password">Mot de passe:</label>
+                <input type="password" name="password"><br>
+        
+                <label for="mail">Adresse mail:</label>
+                <input type="mail" id="mail" name="mail"><br>
+        
+                <label for="gender">Sexe:</label>
+                <select id="register_gender" name="gender">
+                    <option value="male">Homme</option>
+                    <option value="female">Femme</option>
+                    <option value="other">Autre</option>
+                </select><br>
+        
+                <label for="name">Nom:</label>
+                <input type="text" id="name" name="name"><br>
+        
+                <label for="firstname">Prénom:</label>
+                <input type="text" id="firstname" name="firstname"><br>
+        
+                <label for="birthdate">Date de naissance:</label>
+                <input type="date" id="birthdate" name="birthdate"><br>
+                <input type="submit" value="S'inscrire">
+            </form>
+        </div>
+    </div>
+
+
+</body>
+	<script src="connexion.js"></script>
+</html>

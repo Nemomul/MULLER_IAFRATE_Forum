@@ -1,0 +1,372 @@
+*{
+    margin: 0%;
+    padding: 0;
+}
+
+.navbar{
+    justify-content: space-between;
+    display: flex;
+    height: 70px;
+    
+}
+
+.navDroite{
+    display: flex;
+    margin: 45px;
+    width: 200px;
+    justify-content: space-between;
+    font-size: 18px;
+}
+
+
+
+.logoNavBar{
+    padding-top: 15px;
+    padding-bottom: 15px;
+    padding-left: 15px;
+    padding-right: 15px;
+    width: auto;
+    background-color: rgb(255, 177, 125);
+    height: 40px;
+    font-size: 30px;
+}
+
+.logoNavBar:hover{
+    background-color: rgb(41, 41, 41);
+    color: rgb(255, 177, 125);
+    transition: 0.3s;
+}
+
+.logoNavBar:not(:hover) {
+    transition: 0.3s;
+}
+
+.rechercher{
+    width: 300px;
+    height: 30px;
+    border-radius: 0%;
+    border: 1px solid black;
+}
+
+.rechercher:focus{
+    transition: 0.4s ease-in-out;
+    width: 400px;
+}
+
+.rechercher:not(:focus){
+    transition: 0.4s ease-in-out;
+    width: 300px;
+}
+
+.partieBasse{
+    padding-top: 200px;
+    margin: auto;
+    width: calc(100%/1.5);
+    display: flex;
+    justify-content: space-between;
+    padding-bottom: 20px;
+    border-bottom: 1px solid rgb(201, 199, 199);
+    margin-bottom: 50px;
+}
+
+.catégorie{
+    display: flex;
+    justify-content: space-between;
+    width: 350px;
+}
+
+.boutonLogin{
+    width: 100px;
+    height: 32px;
+    border-radius: 0%;
+    border: 1px solid black;
+    margin-left: 25px;
+}
+
+.textepartiebasse{
+    width: 700px;
+    margin: auto;
+    text-align: center;
+}
+
+.titrepartiebasse{
+    font-size: 75px;
+    margin-bottom: 20px;
+}
+
+.soustextepartiebasse{
+    font-size: 25px;
+    margin-bottom: 20px;
+}
+
+.box {
+    width: 458px;
+    height: 200px;
+    border: 1px solid black;
+    margin: 10px;
+    padding: 10px;
+}
+.box img {
+    margin: auto;
+    width: 430px;
+    height: auto;
+}
+
+#container{
+    display: flex;
+    flex-wrap: wrap;
+    width: 1000px;
+    margin: auto;
+    padding-top: 10px;
+    padding-bottom: 50px;
+}
+
+
+.post{
+    margin: auto;
+    width: 1000px
+}
+
+#btn{
+    margin-left: auto;
+    margin-right: 0;
+    margin-top: 100px;
+    width: 150px;
+    height: 42px;
+    border-radius: 0%;
+    border: 1px solid rgb(255, 255, 255);
+    background-color: black;
+    color: aliceblue;
+    font-size: 15px;
+    display: block ruby;
+}
+
+#popup {
+    display: none;
+    position: fixed;
+    z-index: 1;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0,0,0,0.4);
+}
+#popupContenu {
+    background-color: white;
+    margin: 6% auto;
+    padding: 20px;
+    border: 1px solid #888;
+    width: 60%;
+    border-radius: 20px;
+    height: 70%;
+}
+
+#popupContenu .left, #popupContenu .right {
+    flex: 1;
+  
+}
+#popupContenu img {
+    margin: auto;
+    width: 400px;
+    max-width: 100%;
+    max-height: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: auto;
+}
+
+.TitreForum{
+    display: block;
+    width: 100%;
+    margin: auto;
+    text-align: center;
+    font-size: 30px;
+    margin-bottom: 20px;
+}
+
+.InputForum{
+    display: block;
+    width: 70%;
+    margin: auto;
+    text-align: center;
+    font-size: 20px;
+    margin-bottom: 20px;
+}
+
+.ImgForum{
+    display: block;
+    width: 70%;
+    margin: auto;
+    text-align: center;
+    font-size: 30px;
+    margin-bottom: 20px;
+}
+
+#imgParcourir{
+    margin: auto;
+    display: block;
+    font-size: 15px;
+
+}
+
+
+.box{
+    cursor: pointer;
+}
+
+.chef{
+    width: 300px;
+    display: flex;
+    justify-content: space-between;
+    margin: auto;
+    margin-top: 50px;
+    margin-bottom: 50px;
+}
+
+#create-box{
+    width: 100px;
+    height: 80px;
+    background-color: black;
+    color: aliceblue;
+    font-size: 20px;
+
+}
+
+#close-popup{
+    width: 100px;
+    height: 80px;
+    background-color: black;
+    color: aliceblue;
+    font-size: 20px;
+}
+
+#close-popup:hover{
+    background-color: aliceblue;
+    color: black;
+    transition: 0.5s;
+}
+
+#create-box:hover {
+    background-color: aliceblue;
+    color: black;
+    transition: 0.5s;
+}
+
+#close-popup:not(:hover) {
+    transition: 0.5s;
+    
+}
+
+#create-box:not(:hover) {
+    transition: 0.5s;
+}
+
+
+
+
+/* PARTIE TRES IMPORTANTE*/
+
+#partieDiscussion{
+    display: none;
+}
+
+#partieCategorie{
+    display: block;
+}
+
+#partiePost{
+    display: none;
+}
+
+/*FIN PARTIE IMPORTANTE*/
+
+.textePartieCat{
+    width: 700px;
+    margin: auto;
+    align-items: center;
+    text-align: center;
+    margin-bottom: 150px;
+}
+
+.touteCategorie{
+    margin: auto;
+    display: flex;
+    width: 660px;
+    flex-wrap: wrap;
+}
+
+.touteCategorie h1{
+    margin: 15px;
+}
+
+.cat1, .cat2, .cat3, .cat4, .cat5, .cat6, .cat7, .cat8, .cat9, .cat10, .cat11, .cat12{
+    width: 300px;
+    margin: auto;
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 50px;
+    height: 100px;
+    
+}
+
+.cat1{
+    background-image: url("../photo/Capybaras-fiche.jpg");
+    margin: 15px;
+}
+
+.cat2{
+    background-image: url("../photo/Capybaras-fiche.jpg");
+    margin: 15px;
+}
+
+.cat3{
+    background-image: url("../photo/Capybaras-fiche.jpg");
+    margin: 15px;
+}
+
+.cat4{
+    background-image: url("../photo/Capybaras-fiche.jpg");
+    margin: 15px;
+}
+
+.cat5{
+    background-image: url("../photo/Capybaras-fiche.jpg");
+    margin: 15px;
+}
+
+.cat6{
+    background-image: url("../photo/Capybaras-fiche.jpg");
+    margin: 15px;
+}
+
+.cat7{
+    background-image: url("../photo/Capybaras-fiche.jpg");
+    margin: 15px;
+}
+
+.cat8{
+    background-image: url("../photo/Capybaras-fiche.jpg");
+    margin: 15px;
+}
+
+.cat9{
+    background-image: url("../photo/Capybaras-fiche.jpg");
+    margin: 15px;
+}
+
+.cat10{
+    background-image: url("../photo/Capybaras-fiche.jpg");
+    margin: 15px;
+}
+
+.cat11{
+    background-image: url("../photo/Capybaras-fiche.jpg");
+    margin: 15px;
+}
+
+.cat12{
+    background-image: url("../photo/Capybaras-fiche.jpg");
+    margin: 15px;
+}
+
