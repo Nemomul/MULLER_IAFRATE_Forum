@@ -300,73 +300,51 @@
     margin: 15px;
 }
 
-.cat1, .cat2, .cat3, .cat4, .cat5, .cat6, .cat7, .cat8, .cat9, .cat10, .cat11, .cat12{
+.categories{
+    width: 200px;
+    height: auto;
+    border: 1px solid black;
+    background-color: aquamarine;
+    display: contents;
+}
+
+.category{
     width: 300px;
-    margin: auto;
-    display: flex;
-    justify-content: space-between;
-    margin-bottom: 50px;
-    height: 100px;
-    
+    height: 120px;
+    border: 1px solid black;
+    background-color: black;
+    color: aliceblue;
+    margin-left: 28px;
+    margin-bottom: 20px;
+    text-align: center;
+    font-size: 25px;
+    cursor: pointer;
 }
 
-.cat1{
-    background-image: url("../photo/Capybaras-fiche.jpg");
-    margin: 15px;
+h2{
+    margin-top: 35px
 }
 
-.cat2{
-    background-image: url("../photo/Capybaras-fiche.jpg");
-    margin: 15px;
+
+#discussionBtn{
+    border: none;
+    background-color: #88888800;
+    font-size: 17px;
+    cursor: pointer;
 }
 
-.cat3{
-    background-image: url("../photo/Capybaras-fiche.jpg");
-    margin: 15px;
+#categorieBtn{
+    border: none;
+    background-color: #88888800;
+    font-size: 17px;
+    cursor: pointer;
 }
 
-.cat4{
-    background-image: url("../photo/Capybaras-fiche.jpg");
-    margin: 15px;
+#postBtn{
+    border: none;
+    background-color: #88888800;
+    font-size: 17px;
+    cursor: pointer;
 }
 
-.cat5{
-    background-image: url("../photo/Capybaras-fiche.jpg");
-    margin: 15px;
-}
-
-.cat6{
-    background-image: url("../photo/Capybaras-fiche.jpg");
-    margin: 15px;
-}
-
-.cat7{
-    background-image: url("../photo/Capybaras-fiche.jpg");
-    margin: 15px;
-}
-
-.cat8{
-    background-image: url("../photo/Capybaras-fiche.jpg");
-    margin: 15px;
-}
-
-.cat9{
-    background-image: url("../photo/Capybaras-fiche.jpg");
-    margin: 15px;
-}
-
-.cat10{
-    background-image: url("../photo/Capybaras-fiche.jpg");
-    margin: 15px;
-}
-
-.cat11{
-    background-image: url("../photo/Capybaras-fiche.jpg");
-    margin: 15px;
-}
-
-.cat12{
-    background-image: url("../photo/Capybaras-fiche.jpg");
-    margin: 15px;
-}
 

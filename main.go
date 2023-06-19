@@ -5,6 +5,7 @@ import (
 	"html/template"
 	"log"
 	"net/http"
+	"strconv"
 
 	_ "github.com/go-sql-driver/mysql"
 )
@@ -23,7 +24,7 @@ var db *sql.DB
 
 func main() {
 	var err error
-	db, err = sql.Open("mysql", "root:@tcp(localhost:3306)/forum_muller_iafrate")
+	db, err = sql.Open("mysql", "root:@tcp(localhost:3306)/muller-iafrate-forum")
 	if err != nil {
 		log.Fatal(err)
 	}
@@ -35,17 +36,19 @@ func main() {
 	http.HandleFunc("/login", loginFormHandler)
 	http.HandleFunc("/home", homeFormHandler)
 	http.HandleFunc("/register", registerHandler)
-	http.ListenAndServe(":8080", nil)
+	http.HandleFunc("/discussion", createDiscussionHandler)
+	http.HandleFunc("/createurs", creatorHandler)
+	http.ListenAndServe(":9000", nil)
 
 }
 
 func handler(mux *http.ServeMux) {
-	mux.HandleFunc("/assets/main.css", func(w http.ResponseWriter, r *http.Request) {
+	mux.HandleFunc("/css/main.css", func(w http.ResponseWriter, r *http.Request) {
 		w.Header().Set("Content-Type", "text/css")
 		http.ServeFile(w, r, "main.css")
 	})
 
-	mux.HandleFunc("/assets/connexion.css", func(w http.ResponseWriter, r *http.Request) {
+	mux.HandleFunc("/css/connexion.css", func(w http.ResponseWriter, r *http.Request) {
 		w.Header().Set("Content-Type", "text/css")
 		http.ServeFile(w, r, "connexion.css")
 	})
@@ -111,7 +114,7 @@ func loginHandler(w http.ResponseWriter, r *http.Request) {
 	password := r.FormValue("password")
 
 	// Connexion à la base de données
-	db, err := sql.Open("mysql", "root:@tcp(localhost:3306)/forum_muller_iafrate")
+	db, err := sql.Open("mysql", "root:@tcp(localhost:3306)/muller-iafrate-forum")
 	if err != nil {
 		log.Fatal(err)
 	}
@@ -146,9 +149,19 @@ func loginFormHandler(w http.ResponseWriter, r *http.Request) {
 }
 
 func homeFormHandler(w http.ResponseWriter, r *http.Request) {
+	categories, err := getCategories()
+	if err != nil {
+		http.Error(w, "Impossible de charger les catégories", http.StatusInternalServerError)
+		return
+	}
+
 	tmpl := template.Must(template.ParseFiles("acceuil.html"))
-	tmpl.Execute(w, nil)
-	return
+	tmpl.Execute(w, categories)
+}
+
+func creatorHandler(w http.ResponseWriter, r *http.Request) {
+	tmpl1 := template.Must(template.ParseFiles("créateurs.html"))
+	tmpl1.Execute(w, nil)
 }
 
 func userExists(username string) bool {
@@ -171,4 +184,63 @@ func authenticateUser(username, password string) bool {
 	}
 
 	return count > 0
+}
+
+/* CATEGORIE */
+
+type Category struct {
+	Id    string
+	Genre string
+}
+
+func getCategories() ([]Category, error) {
+	rows, err := db.Query("SELECT id_cat, gender FROM category")
+	if err != nil {
+		return nil, err
+	}
+	defer rows.Close()
+
+	var categories []Category
+	for rows.Next() {
+		var cat Category
+		if err := rows.Scan(&cat.Id, &cat.Genre); err != nil {
+			return nil, err
+		}
+		categories = append(categories, cat)
+	}
+
+	if err := rows.Err(); err != nil {
+		return nil, err
+	}
+
+	return categories, nil
+}
+
+func createDiscussionHandler(w http.ResponseWriter, r *http.Request) {
+	// Vérifiez la méthode de la requête
+	if r.Method != http.MethodPost {
+		// Si ce n'est pas une requête POST, renvoyez une erreur 405 (Méthode non autorisée)
+		http.Error(w, "Invalid request method", http.StatusMethodNotAllowed)
+		return
+	}
+
+	// Récupérez les valeurs du formulaire
+	nameDiscussion := r.FormValue("name_discussion")
+	dateStart := r.FormValue("date_start")
+	idUsers, err := strconv.Atoi(r.FormValue("id_users"))
+	if err != nil {
+		http.Error(w, err.Error(), http.StatusInternalServerError)
+		return
+	}
+
+	// Insérez les données dans la base de données
+	_, err = db.Exec("INSERT INTO discussion (name_discussion, date_start, id_users) VALUES (?, ?, ?)", nameDiscussion, dateStart, idUsers)
+	if err != nil {
+		http.Error(w, err.Error(), http.StatusInternalServerError)
+		return
+	}
+	tmpl1 := template.Must(template.ParseFiles("discussion.html"))
+	tmpl1.Execute(w, nil)
+	// Si tout va bien, redirigez vers la page discussion.html
+	http.Redirect(w, r, "/discussion", http.StatusSeeOther)
 }

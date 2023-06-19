@@ -23,8 +23,23 @@ body{
     display: flex;
     flex-direction: column;
     align-items: center;
-   margin: auto;
-   padding-top: 150px;
+    margin: auto;
+    padding-top: 150px;
+    width: 300px;
+}
+
+.connexionUsername{
+    align-items: center;
+    justify-content: center;
+    display: flex;
+    flex-direction: column;
+}
+
+.connexionMDP{
+    align-items: center;
+    justify-content: center;
+    display: flex;
+    flex-direction: column;
 }
 
 .inputConnexionUsername{
@@ -32,22 +47,29 @@ body{
     height: 40px;
     border-radius: 15px;
     font-size: 22px;
+    align-items: center;
+    margin-bottom: 50px;
 }
 
 .inputConnexionMDP{
     width: 300px;
     height: 40px;
-    margin-top: 60px;
     border-radius: 15px;
     font-size: 22px;
+    margin-bottom: 60px;
+}
+
+.titreConnexionInput{
+    font-size: 25px;
+    margin-bottom: 10px;
 }
 
 .titreConnexion{
     color: rgb(0, 0, 0);
     font-family: Arial, Helvetica, sans-serif;
-    font-size: 40px;
+    font-size: 35px;
     margin: auto;
-    width: 160px;
+    width: 180px;
     padding-top: 30px;
     padding-bottom: 60px;
     position: absolute;
@@ -62,8 +84,7 @@ body{
     height: 54px;
     width: 204px;
     font-size: 20px;
-    margin-top: 80px;
-    margin-left: 98px;
+    margin-left: 47px;
     position: absolute;
 
 }
@@ -81,7 +102,7 @@ body{
 
 #boutonFermer2{
     position: absolute;
-    margin-left: 353px;
+    margin-left: 553px;
     margin-top: 7px;
     width: 40px;
     height: 40px;
@@ -98,10 +119,10 @@ body{
 
 #popupSinscrire{
     background-color: rgb(254, 254, 255);
-    width: 400px;
-    height: 500px;
+    width: 600px;
+    height: 800px;
     margin: auto;
-    margin-top: 200px;
+    margin-top: 100px;
     align-content: center;
     border-radius: 15px;
     display: none;
@@ -111,7 +132,67 @@ body{
     flex-direction: column;
     align-items: center;
     margin: auto;
-    padding-top: 120px;
+    padding-top: 20px;
+}
+
+.inscriptionUsername, .inscriptionMDP, .inscriptionMail, .inscriptionNom, .inscriptionPrenom, .inscriptionDate{
+    align-items: center;
+    justify-content: center;
+    display: flex;
+    flex-direction: column;
+    text-align: center;
+}
+
+.inscriptionTitre{
+    color: rgb(0, 0, 0);
+    font-family: Arial, Helvetica, sans-serif;
+    font-size: 25px;
+    margin: auto;
+    width: 200px;
+    margin-bottom: 5px;
+    margin-top: 10px;
+
+
+}
+
+
+.titreInscription{
+    font-size: 40px;
+    padding-top: 30px;
+}
+.inscriptionSexe{
+    display: flex;
+    flex-direction: column;
+}
+
+
+.inscriptionTitreSexe{
+    margin-top: 10px;
+    font-size: 25px;
+    text-align: center;
+}
+
+.inscriptionTitreDate{
+    
+    font-size: 25px;
+    text-align: center;
+}
+select{
+    width: 300px;
+    height: 40px;
+    border-radius: 15px;
+    font-size: 22px;
+    margin-top: 5px;
+    margin-bottom: 15px;
+}
+
+#birthdate{
+    width: 300px;
+    height: 40px;
+    border-radius: 15px;
+    font-size: 22px;
+    margin-top: 5px;
+    margin-bottom: 15px;
 }
 
 .inputInscriptionUsername{
@@ -147,8 +228,39 @@ body{
     height: 54px;
     width: 204px;
     font-size: 20px;
-    margin-top: 40px;
-    margin-left: 98px;
+    margin-top: 10px;
+    margin-left: 48px;
     position: absolute;
     
+}
+
+
+#discussionBtn{
+    border: none;
+    background-color: #88888800;
+    font-size: 17px;
+    cursor: pointer;
+}
+
+#categorieBtn{
+    border: none;
+    background-color: #88888800;
+    font-size: 17px;
+    cursor: pointer;
+}
+
+#postBtn{
+    border: none;
+    background-color: #88888800;
+    font-size: 17px;
+    cursor: pointer;
+}
+
+#trap {
+    color: white;
+}
+#hub {
+    color: rgb(0, 0, 0);
+    background-color: orange;
+    border-radius: 10px;
 }
