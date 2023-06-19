@@ -1,0 +1,76 @@
+body{
+    font-family: Arial, Helvetica, sans-serif;
+}
+
+.titreDiscussion {
+    width: calc(100%/1.4);
+    margin: auto;
+    margin-top: 100px;
+}
+
+.titreDis{
+    border-bottom: 1px solid rgb(165, 165, 165);
+    font-size: 50px;
+}
+
+.SujetCategorie{
+    width:calc(100%/1.4);
+    justify-content: space-between;
+    display: flex;
+    padding-left: 200px;
+    margin-bottom: 100px;
+}
+
+.sujet{
+    font-size: 30px;
+}
+
+.categorie{
+    font-size: 30px;
+}
+
+.message{
+    margin: auto;
+    width: auto;
+    height: auto;
+    max-width: calc(100%/1.4);
+    min-width: 500px;
+    min-height: 50px;
+    font-size: 20px;
+    background-color: antiquewhite;
+    border-top-left-radius: 20px;
+    border-top-right-radius: 20px;
+    border-bottom-right-radius: 20px;
+    margin-bottom: 20px;
+}
+
+.message p{
+    margin-left: 5px;
+}
+
+#messageInput{
+    display: block;
+    margin: auto;
+    width: calc(100%/1.4);
+    border: 1px solid rgb(167, 167, 167);
+    height: 50px;
+    resize: none; 
+    font-size: 20px;
+    margin-top: 150px;
+    margin-bottom: 100px;
+}
+
+#submitMessageBtn{
+    width: 100px;
+    height: 52px;
+    margin-top: 150px;
+    margin-bottom: 100px;
+}
+
+.coucou{
+    display: flex;
+    justify-content: space-between;
+    width: calc(100%/1.4);
+    margin: auto;
+    margin-bottom: 100px;
+}

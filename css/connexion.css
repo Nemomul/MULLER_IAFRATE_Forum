@@ -254,4 +254,16 @@ select{
     background-color: #88888800;
     font-size: 17px;
     cursor: pointer;
+<<<<<<< HEAD
+=======
+}
+
+#trap {
+    color: white;
+}
+#hub {
+    color: rgb(0, 0, 0);
+    background-color: orange;
+    border-radius: 10px;
+>>>>>>> 08f0baea43ce2e6497e49597907d662a5419561d
 }

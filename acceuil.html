@@ -5,7 +5,12 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Accueil</title>
+<<<<<<< HEAD
     <link rel="stylesheet" href="/css/acceuil.css">
+=======
+    <link rel="stylesheet" href="css/acceuil.css">
+    <link rel="stylesheet" href="css/footer.css">
+>>>>>>> 08f0baea43ce2e6497e49597907d662a5419561d
 </head>
 <body>
 
@@ -17,9 +22,15 @@
         </div>
 
         <div class="navDroite">
+<<<<<<< HEAD
             <a href="/">Forum</a>
             <a href="/créateurs">Créateurs</a>
             <a href="/login">Log In</a>
+=======
+            <a href="/home">Forum</a>
+            <a href="/createurs">Créateurs</a>
+            <a href="/login">Log Out</a>
+>>>>>>> 08f0baea43ce2e6497e49597907d662a5419561d
         </div>
 
     </div>
@@ -33,7 +44,7 @@
         </div>
         <div>
             <input type="text" class="rechercher" placeholder="Rechercher" autocomplete="off">
-            <a href="/connexion"><button class="boutonLogin">Login/Sign Up</button></a>
+            <a href="/login"><button class="boutonLogin">Login/Sign Up</button></a>
         </div>
     </div>
 
@@ -50,12 +61,23 @@
         <div id="popup">
             <div id="popupContenu">
                 <div class="left">
-                    <label for="title" class="TitreForum">Titre du forum:</label><br>
-                    <input type="text" id="title" name="title" class="InputForum"><br>
+                    <form action="/discussion" method="post">
+                        <label for="name_discussion" class="TitreForum">Nom de la discussion :</label>
+                        <input type="text" id="name_discussion" name="name_discussion" required class="InputForum">
+                    
+                        <label for="date_start" class="TitreForum">Date de début :</label>
+                        <input type="datetime-local" id="date_start" name="date_start" required class="InputForum">
+                    
+                        <label for="id_users" class="TitreForum">ID de l'utilisateur :</label>
+                        <input type="number" id="id_users" name="id_users" required class="InputForum">
+                    
+                        <button type="submit" id="create-box">Créer la discussion</button>
+                    </form>
+                    
                     <label for="imgParcourir" class="ImgForum">Image:</label><br>
                     <input type="file" id="imgParcourir" name="imgParcourir" accept="image/*"><br>
                     <div class="chef">
-                        <button id="create-box">Créer</button>
+                        
                         <button id="close-popup">Fermer</button>
                     </div>
                 </div>
@@ -66,6 +88,7 @@
         </div>
     </div>
 
+<<<<<<< HEAD
     
     <form action="/create-discussion" method="post">
         <label for="name_discussion">Nom de la discussion :</label>
@@ -80,6 +103,8 @@
         <button type="submit">Créer la discussion</button>
     </form>
     
+=======
+>>>>>>> 08f0baea43ce2e6497e49597907d662a5419561d
 
     <div id="partieCategorie">
         <div class="textePartieCat">
@@ -88,6 +113,7 @@
         </div>
         <div class="touteCategorie">
             <div class="categories">
+<<<<<<< HEAD
                 <button class="category" data-cat-id="1">
                     <h2>Métal</h2>
                 </button>
@@ -121,7 +147,15 @@
                 <button class="category" data-cat-id="11">
                     <h2>RnB</h2>
                 </button>
+=======
+                {{range .}}
+                    <div class="category">
+                        <h2>{{.Genre}}</h2>
+                    </div>
+                {{end}}
+>>>>>>> 08f0baea43ce2e6497e49597907d662a5419561d
             </div>
+            
         </div>
     </div>
 
@@ -130,10 +164,33 @@
     </div>
     
 
+    <footer>
+        <div class="footer">
+            <div class="row">
+                <h1>TrapHub</h1>
+            </div>
+    
+            <div class="row">
+                <ul>
+                    <li><a href="#">Contact us</a></li>
+                    <li><a href="#">Our Services</a></li>
+                    <li><a href="#">Privacy Policy</a></li>
+                    <li><a href="#">Terms & Conditions</a></li>
+                    <li><a href="#">Career</a></li>
+                </ul>
+            </div>
+        </div>
+    </footer>
+    
+
 
 
 </body>
+<<<<<<< HEAD
 <script src="acceuil.js"></script>
+=======
+<script src="accueil.js"></script>
+>>>>>>> 08f0baea43ce2e6497e49597907d662a5419561d
 <script>
 
 document.addEventListener('DOMContentLoaded', function() {

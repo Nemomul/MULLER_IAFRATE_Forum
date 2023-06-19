@@ -7,8 +7,11 @@ import (
 	"log"
 	"net/http"
 	"strconv"
+<<<<<<< HEAD
 
 	"github.com/gorilla/mux"
+=======
+>>>>>>> 08f0baea43ce2e6497e49597907d662a5419561d
 
 	_ "github.com/go-sql-driver/mysql"
 )
@@ -27,7 +30,7 @@ var db *sql.DB
 
 func main() {
 	var err error
-	db, err = sql.Open("mysql", "root:@tcp(localhost:3306)/forum_muller_iafrate")
+	db, err = sql.Open("mysql", "root:@tcp(localhost:3306)/muller-iafrate-forum")
 	if err != nil {
 		log.Fatal(err)
 	}
@@ -44,6 +47,11 @@ func main() {
 	http.HandleFunc("/create-discussion", createDiscussionHandler)
 	http.HandleFunc("/home", homeFormHandler)
 	http.HandleFunc("/register", registerHandler)
+<<<<<<< HEAD
+=======
+	http.HandleFunc("/discussion", createDiscussionHandler)
+	http.HandleFunc("/createurs", creatorHandler)
+>>>>>>> 08f0baea43ce2e6497e49597907d662a5419561d
 	http.ListenAndServe(":9000", nil)
 
 }
@@ -128,7 +136,7 @@ func loginHandler(w http.ResponseWriter, r *http.Request) {
 	password := r.FormValue("password")
 
 	// Connexion à la base de données
-	db, err := sql.Open("mysql", "root:@tcp(localhost:3306)/forum_muller_iafrate")
+	db, err := sql.Open("mysql", "root:@tcp(localhost:3306)/muller-iafrate-forum")
 	if err != nil {
 		log.Fatal(err)
 	}
@@ -171,6 +179,14 @@ func homeFormHandler(w http.ResponseWriter, r *http.Request) {
 
 	tmpl := template.Must(template.ParseFiles("acceuil.html"))
 	tmpl.Execute(w, categories)
+<<<<<<< HEAD
+=======
+}
+
+func creatorHandler(w http.ResponseWriter, r *http.Request) {
+	tmpl1 := template.Must(template.ParseFiles("créateurs.html"))
+	tmpl1.Execute(w, nil)
+>>>>>>> 08f0baea43ce2e6497e49597907d662a5419561d
 }
 
 func userExists(username string) bool {
@@ -248,6 +264,7 @@ func createDiscussionHandler(w http.ResponseWriter, r *http.Request) {
 		http.Error(w, err.Error(), http.StatusInternalServerError)
 		return
 	}
+<<<<<<< HEAD
 
 	// Si tout va bien, renvoyez une réponse 200 (OK)
 	w.WriteHeader(http.StatusOK)
@@ -354,4 +371,10 @@ func discuByCategoryHandler(w http.ResponseWriter, r *http.Request) {
 		w.Header().Set("Content-Type", "application/json")
 		json.NewEncoder(w).Encode(discussions)
 	})
+=======
+	tmpl1 := template.Must(template.ParseFiles("discussion.html"))
+	tmpl1.Execute(w, nil)
+	// Si tout va bien, redirigez vers la page discussion.html
+	http.Redirect(w, r, "/discussion", http.StatusSeeOther)
+>>>>>>> 08f0baea43ce2e6497e49597907d662a5419561d
 }
