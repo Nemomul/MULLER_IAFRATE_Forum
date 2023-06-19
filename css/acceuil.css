@@ -311,62 +311,103 @@
 }
 
 .cat1{
-    background-image: url("../photo/Capybaras-fiche.jpg");
+    background-image: url("/assets/categorie/métal.jpg");
     margin: 15px;
 }
 
 .cat2{
-    background-image: url("../photo/Capybaras-fiche.jpg");
+    background-image: url("/assets/categorie/rap.jpg");
     margin: 15px;
 }
 
 .cat3{
-    background-image: url("../photo/Capybaras-fiche.jpg");
+    background-image: url("/assets/categorie/indie.jpg");
     margin: 15px;
 }
 
 .cat4{
-    background-image: url("../photo/Capybaras-fiche.jpg");
+    background-image: url("/assets/categorie/rock.jpg");
     margin: 15px;
 }
 
 .cat5{
-    background-image: url("../photo/Capybaras-fiche.jpg");
+    background-image: url("/assets/categorie/pop.jpg");
     margin: 15px;
 }
 
 .cat6{
-    background-image: url("../photo/Capybaras-fiche.jpg");
+    background-image: url("/assets/categorie/jazz.jpg");
     margin: 15px;
 }
 
 .cat7{
-    background-image: url("../photo/Capybaras-fiche.jpg");
+    background-image: url("/assets/categorie/raegge.jpg");
     margin: 15px;
 }
 
 .cat8{
-    background-image: url("../photo/Capybaras-fiche.jpg");
+    background-image: url("/assets/categorie/electro.jpg");
     margin: 15px;
 }
 
 .cat9{
-    background-image: url("../photo/Capybaras-fiche.jpg");
+    background-image: url("/assets/categorie/classic.jpg");
     margin: 15px;
 }
 
 .cat10{
-    background-image: url("../photo/Capybaras-fiche.jpg");
+    background-image: url("/assets/categorie/opéra.jpg");
     margin: 15px;
 }
 
 .cat11{
-    background-image: url("../photo/Capybaras-fiche.jpg");
+    background-image: url("/assets/categorie/rnb.jpg");
     margin: 15px;
 }
 
-.cat12{
-    background-image: url("../photo/Capybaras-fiche.jpg");
-    margin: 15px;
+.categories{
+    width: 200px;
+    height: auto;
+    border: 1px solid black;
+    background-color: aquamarine;
+    display: contents;
 }
 
+.category{
+    width: 300px;
+    height: 120px;
+    border: 1px solid black;
+    background-color: black;
+    color: aliceblue;
+    margin-left: 28px;
+    margin-bottom: 20px;
+    text-align: center;
+    font-size: 25px;
+    cursor: pointer;
+}
+
+h2{
+    margin-top: 35px
+}
+
+
+#discussionBtn{
+    border: none;
+    background-color: #88888800;
+    font-size: 17px;
+    cursor: pointer;
+}
+
+#categorieBtn{
+    border: none;
+    background-color: #88888800;
+    font-size: 17px;
+    cursor: pointer;
+}
+
+#postBtn{
+    border: none;
+    background-color: #88888800;
+    font-size: 17px;
+    cursor: pointer;
+}

@@ -31,47 +31,61 @@
         <h1 class="titreConnexion">TrapHub</h1>
         <div class="lesInputs">
             <form action="/login" method="POST">
-                <label for="username">Nom d'utilisateur:</label>
-                <input type="text" id="username" name="username" required>
+                <div class="connexionUsername">
+                    <label for="username" class="titreConnexionInput">Nom d'utilisateur:</label>
+                    <input type="text" id="username" class="inputConnexionUsername" name="username" required>
+                </div>
+                <div class="connexionMDP">
+                    <label for="password" class="titreConnexionInput">Mot de passe:</label>
+                    <input type="password" id="password" class="inputConnexionMDP" name="password" required>
+                </div>
         
-                <label for="password">Mot de passe:</label>
-                <input type="password" id="password" name="password" required>
-        
-                <button type="submit">Connexion</button>
+                <button type="submit" class="boutonConnexion">Connexion</button>
             </form>
         </div>
     </div>
 
     <div id="popupSinscrire">
         <button id="boutonFermer2">X</button>
-        <h1 class="titreConnexion">TrapHub</h1>
+        <h1 class="titreInscription">TrapHub</h1>
         <div class="lesInputsInscription">
             <form action="/register" method="post">
-                <label for="username">Nom d'utilisateur:</label>
-                <input type="text" name="username"><br>
-        
-                <label for="password">Mot de passe:</label>
-                <input type="password" name="password"><br>
-        
-                <label for="mail">Adresse mail:</label>
-                <input type="mail" id="mail" name="mail"><br>
-        
-                <label for="gender">Sexe:</label>
-                <select id="register_gender" name="gender">
-                    <option value="male">Homme</option>
-                    <option value="female">Femme</option>
-                    <option value="other">Autre</option>
-                </select><br>
-        
-                <label for="name">Nom:</label>
-                <input type="text" id="name" name="name"><br>
-        
-                <label for="firstname">Prénom:</label>
-                <input type="text" id="firstname" name="firstname"><br>
-        
-                <label for="birthdate">Date de naissance:</label>
-                <input type="date" id="birthdate" name="birthdate"><br>
-                <input type="submit" value="S'inscrire">
+                <div class="toutInscription">
+                    <div class="inscriptionUsername">
+                        <label for="username" class="inscriptionTitre">Nom d'utilisateur:</label>
+                        <input type="text" name="username" class="inputInscriptionUsername"><br>
+                    </div>
+                    <div class="inscriptionMDP">
+                        <label for="password" class="inscriptionTitre">Mot de passe:</label>
+                        <input type="password" name="password" class="inputInscriptionUsername"><br>
+                    </div>
+                    <div class="inscriptionMail">
+                        <label for="mail" class="inscriptionTitre">Adresse mail:</label>
+                        <input type="mail" id="mail" name="mail" class="inputInscriptionUsername"><br>
+                    </div>
+                    <div class="inscriptionNom">
+                        <label for="name" class="inscriptionTitre">Nom:</label>
+                        <input type="text" id="name" name="name" class="inputInscriptionUsername"><br>
+                    </div>
+                    <div class="inscriptionPrenom">
+                        <label for="firstname" class="inscriptionTitre">Prénom:</label>
+                        <input type="text" id="firstname" name="firstname" class="inputInscriptionUsername"><br>
+                    </div>
+                    <div class="inscriptionSexe">
+                        <label for="gender" class="inscriptionTitreSexe">Sexe:</label>
+                        <select id="register_gender" name="gender" >
+                            <option value="male">Homme</option>
+                            <option value="female">Femme</option>
+                            <option value="other">Autre</option>
+                        </select><br>
+                    </div>
+                    <div class="inscriptionDate">
+                        <label for="birthdate" class="inscriptionTitreDate">Date de naissance:</label>
+                        <input type="date" id="birthdate" name="birthdate"><br>
+                    </div>
+                    
+                    <input type="submit" value="S'inscrire" class="boutonInscription">
+                </div>
             </form>
         </div>
     </div>

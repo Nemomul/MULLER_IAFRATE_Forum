@@ -5,7 +5,7 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Accueil</title>
-    <link rel="stylesheet" href="acceuil.css">
+    <link rel="stylesheet" href="/css/acceuil.css">
 </head>
 <body>
 
@@ -19,21 +19,24 @@
         <div class="navDroite">
             <a href="/">Forum</a>
             <a href="/créateurs">Créateurs</a>
-            <a href="/connexion">Log In</a>
+            <a href="/login">Log In</a>
         </div>
 
     </div>
+
+    
     <div class="partieBasse">
         <div class="catégorie">
-            <p>Discussions</p>
-            <p>Catégories</p>
-            <p>Mes posts</p>
+            <button id="discussionBtn">Discussions</button>
+            <button id="categorieBtn">Catégories</button>
+            <button id="postBtn">Mes posts</button>
         </div>
         <div>
             <input type="text" class="rechercher" placeholder="Rechercher" autocomplete="off">
             <a href="/connexion"><button class="boutonLogin">Login/Sign Up</button></a>
         </div>
     </div>
+
 
     <div id="partieDiscussion">
         <div class="textepartiebasse">
@@ -63,47 +66,61 @@
         </div>
     </div>
 
+    
+    <form action="/create-discussion" method="post">
+        <label for="name_discussion">Nom de la discussion :</label>
+        <input type="text" id="name_discussion" name="name_discussion" required>
+    
+        <label for="date_start">Date de début :</label>
+        <input type="datetime-local" id="date_start" name="date_start" required>
+    
+        <label for="id_users">ID de l'utilisateur :</label>
+        <input type="number" id="id_users" name="id_users" required>
+    
+        <button type="submit">Créer la discussion</button>
+    </form>
+    
+
     <div id="partieCategorie">
         <div class="textePartieCat">
             <h1 class="titrepartiebasse">Catégories</h1>
             <p class="soustextepartiebasse">Explorez le forum ci-dessous et trouvez des réponses à toutes vos questions.</p>
         </div>
         <div class="touteCategorie">
-            <div class="cat1">
-                <h1>RAP</h1>
-            </div>
-            <div class="cat2">
-                <h1>ROCK</h1>            
-            </div>
-            <div class="cat3">
-                <h1>METAL</h1>
-            </div>
-            <div class="cat4">
-                <h1>OPERA</h1>
-            </div>
-            <div class="cat5">
-                <h1>POP</h1>
-            </div>
-            <div class="cat6">
-                <h1>RAP</h1>
-            </div>
-            <div class="cat7">
-                <h1>RAP</h1>
-            </div>
-            <div class="cat8">
-                <h1>RAP</h1>
-            </div>
-            <div class="cat9">
-                <h1>RAP</h1>
-            </div>
-            <div class="cat10">
-                <h1>RAP</h1>
-            </div>
-            <div class="cat11">
-                <h1>RAP</h1>
-            </div>
-            <div class="cat12">
-                <h1>RAP</h1>
+            <div class="categories">
+                <button class="category" data-cat-id="1">
+                    <h2>Métal</h2>
+                </button>
+                <button class="category" data-cat-id="2">
+                    <h2>Rap</h2>
+                </button>
+                <button class="category" data-cat-id="3">
+                    <h2>Indie</h2>
+                </button>
+                <button class="category" data-cat-id="4">
+                    <h2>Rock</h2>
+                </button>
+                <button class="category" data-cat-id="5">
+                    <h2>Pop</h2>
+                </button>
+                <button class="category" data-cat-id="6">
+                    <h2>Jazz</h2>
+                </button>
+                <button class="category" data-cat-id="7">
+                    <h2>Raegge</h2>
+                </button>
+                <button class="category" data-cat-id="8">
+                    <h2>Electro</h2>
+                </button>
+                <button class="category" data-cat-id="9">
+                    <h2>Classic</h2>
+                </button>
+                <button class="category" data-cat-id="10">
+                    <h2>Opéra</h2>
+                </button>
+                <button class="category" data-cat-id="11">
+                    <h2>RnB</h2>
+                </button>
             </div>
         </div>
     </div>
@@ -116,8 +133,10 @@
 
 
 </body>
-<script src="../assets/js/main.js"></script>
+<script src="acceuil.js"></script>
 <script>
+
+document.addEventListener('DOMContentLoaded', function() {
     fetch('/data')
         .then(response => response.json())
         .then(data => {
@@ -129,5 +148,8 @@
             });
         })
         .catch(error => console.error(error));
+});
+
+
 </script>
 </html>

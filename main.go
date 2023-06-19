@@ -2,9 +2,13 @@ package main
 
 import (
 	"database/sql"
+	"encoding/json"
 	"html/template"
 	"log"
 	"net/http"
+	"strconv"
+
+	"github.com/gorilla/mux"
 
 	_ "github.com/go-sql-driver/mysql"
 )
@@ -32,20 +36,25 @@ func main() {
 	fs := http.FileServer(http.Dir("."))
 	http.Handle("/", fs)
 
+	r := mux.NewRouter()
+	r.HandleFunc("/discussions", discussionsByCategoryHandler).Methods("GET")
+	http.Handle("/acceuil", r)
+
 	http.HandleFunc("/login", loginFormHandler)
+	http.HandleFunc("/create-discussion", createDiscussionHandler)
 	http.HandleFunc("/home", homeFormHandler)
 	http.HandleFunc("/register", registerHandler)
-	http.ListenAndServe(":8080", nil)
+	http.ListenAndServe(":9000", nil)
 
 }
 
 func handler(mux *http.ServeMux) {
-	mux.HandleFunc("/assets/main.css", func(w http.ResponseWriter, r *http.Request) {
+	mux.HandleFunc("/css/main.css", func(w http.ResponseWriter, r *http.Request) {
 		w.Header().Set("Content-Type", "text/css")
 		http.ServeFile(w, r, "main.css")
 	})
 
-	mux.HandleFunc("/assets/connexion.css", func(w http.ResponseWriter, r *http.Request) {
+	mux.HandleFunc("/css/connexion.css", func(w http.ResponseWriter, r *http.Request) {
 		w.Header().Set("Content-Type", "text/css")
 		http.ServeFile(w, r, "connexion.css")
 	})
@@ -54,6 +63,14 @@ func handler(mux *http.ServeMux) {
 		w.Header().Set("Content-Type", "application/javascript")
 		http.ServeFile(w, r, "connexion.js")
 	})
+
+	mux.HandleFunc("/css/acceuil.css", func(w http.ResponseWriter, r *http.Request) {
+		w.Header().Set("Content-Type", "text/css")
+		http.ServeFile(w, r, "acceuil.css")
+	})
+
+	mux.HandleFunc("/discussions/{categoryID}", discussionsByCategoryHandler)
+
 }
 
 func registerHandler(w http.ResponseWriter, r *http.Request) {
@@ -146,9 +163,14 @@ func loginFormHandler(w http.ResponseWriter, r *http.Request) {
 }
 
 func homeFormHandler(w http.ResponseWriter, r *http.Request) {
+	categories, err := getCategories()
+	if err != nil {
+		http.Error(w, "Impossible de charger les catégories", http.StatusInternalServerError)
+		return
+	}
+
 	tmpl := template.Must(template.ParseFiles("acceuil.html"))
-	tmpl.Execute(w, nil)
-	return
+	tmpl.Execute(w, categories)
 }
 
 func userExists(username string) bool {
@@ -171,4 +193,165 @@ func authenticateUser(username, password string) bool {
 	}
 
 	return count > 0
+}
+
+/* CATEGORIE */
+
+type Category struct {
+	Id    string
+	Genre string
+}
+
+func getCategories() ([]Category, error) {
+	rows, err := db.Query("SELECT id_cat, gender FROM category")
+	if err != nil {
+		return nil, err
+	}
+	defer rows.Close()
+
+	var categories []Category
+	for rows.Next() {
+		var cat Category
+		if err := rows.Scan(&cat.Id, &cat.Genre); err != nil {
+			return nil, err
+		}
+		categories = append(categories, cat)
+	}
+
+	if err := rows.Err(); err != nil {
+		return nil, err
+	}
+
+	return categories, nil
+}
+
+func createDiscussionHandler(w http.ResponseWriter, r *http.Request) {
+	// Vérifiez la méthode de la requête
+	if r.Method != http.MethodPost {
+		// Si ce n'est pas une requête POST, renvoyez une erreur 405 (Méthode non autorisée)
+		http.Error(w, "Invalid request method", http.StatusMethodNotAllowed)
+		return
+	}
+
+	// Récupérez les valeurs du formulaire
+	nameDiscussion := r.FormValue("name_discussion")
+	dateStart := r.FormValue("date_start")
+	idUsers, err := strconv.Atoi(r.FormValue("id_users"))
+	if err != nil {
+		http.Error(w, err.Error(), http.StatusInternalServerError)
+		return
+	}
+
+	// Insérez les données dans la base de données
+	_, err = db.Exec("INSERT INTO discussion (name_discussion, date_start, id_users) VALUES (?, ?, ?)", nameDiscussion, dateStart, idUsers)
+	if err != nil {
+		http.Error(w, err.Error(), http.StatusInternalServerError)
+		return
+	}
+
+	// Si tout va bien, renvoyez une réponse 200 (OK)
+	w.WriteHeader(http.StatusOK)
+}
+
+type Discussion struct {
+	ID   int
+	Name string
+	// Ajoutez d'autres champs si nécessaire
+}
+
+func discussionsByCategoryHandler(w http.ResponseWriter, r *http.Request) {
+	// Récupérer l'ID de la catégorie depuis la requête
+	categoryID := mux.Vars(r)["categoryID"]
+
+	// Effectuer une requête dans la base de données pour récupérer les discussions correspondantes à la catégorie
+	rows, err := db.Query("SELECT d.id_discussion, d.name_discussion FROM discussion d JOIN category_discussion cd ON d.id_discussion = cd.id_discussion WHERE cd.id_cat = ?", categoryID)
+	if err != nil {
+		http.Error(w, err.Error(), http.StatusInternalServerError)
+		return
+	}
+	defer rows.Close()
+
+	// Parcourir les résultats de la requête et stocker les discussions dans une structure de données appropriée
+	var discussions []Discussion
+	for rows.Next() {
+		var discussion Discussion
+		if err := rows.Scan(&discussion.ID, &discussion.Name); err != nil {
+			http.Error(w, err.Error(), http.StatusInternalServerError)
+			return
+		}
+		discussions = append(discussions, discussion)
+	}
+	if err := rows.Err(); err != nil {
+		http.Error(w, err.Error(), http.StatusInternalServerError)
+		return
+	}
+
+	// Convertir les discussions en JSON
+	jsonData, err := json.Marshal(discussions)
+	if err != nil {
+		http.Error(w, err.Error(), http.StatusInternalServerError)
+		return
+	}
+
+	// Définir l'en-tête Content-Type sur application/json
+	w.Header().Set("Content-Type", "application/json")
+	// Renvoyer les données JSON
+	w.Write(jsonData)
+}
+
+func discuByCategoryHandler(w http.ResponseWriter, r *http.Request) {
+
+	http.HandleFunc("/getDiscussions", func(w http.ResponseWriter, r *http.Request) {
+		idCatStr := r.URL.Query().Get("id_cat")
+		if idCatStr == "" {
+			http.Error(w, "Missing id_cat", http.StatusBadRequest)
+			return
+		}
+		idCat, err := strconv.Atoi(idCatStr)
+		if err != nil {
+			http.Error(w, "Invalid id_cat", http.StatusBadRequest)
+			return
+		}
+		rows, err := db.Query("SELECT d.* FROM discussions d JOIN category_discussions cd ON d.id = cd.discussion_id WHERE cd.id_cat = ?", idCat)
+		if err != nil {
+			http.Error(w, "Database error", http.StatusInternalServerError)
+			return
+		}
+		defer rows.Close()
+
+		var discussions []map[string]interface{}
+		columns, err := rows.Columns()
+		if err != nil {
+			http.Error(w, "Failed to get columns", http.StatusInternalServerError)
+			return
+		}
+		for rows.Next() {
+			values := make([]sql.RawBytes, len(columns))
+			scanArgs := make([]interface{}, len(values))
+			for i := range values {
+				scanArgs[i] = &values[i]
+			}
+			err = rows.Scan(scanArgs...)
+			if err != nil {
+				http.Error(w, "Failed to scan row", http.StatusInternalServerError)
+				return
+			}
+			row := make(map[string]interface{})
+			for i, value := range values {
+				if value == nil {
+					row[columns[i]] = nil
+				} else {
+					row[columns[i]] = string(value)
+				}
+			}
+			discussions = append(discussions, row)
+		}
+		if err = rows.Err(); err != nil {
+			http.Error(w, "Failed to read rows", http.StatusInternalServerError)
+			return
+		}
+
+		w.Header().Set("Content-Type", "application/json")
+		json.NewEncoder(w).Encode(discussions)
+	})
 }
